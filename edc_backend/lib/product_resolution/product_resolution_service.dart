@@ -40,7 +40,10 @@ class ProductResolutionService {
     for (final base in _sources) {
       final url = Uri.parse('$base/$barcode.json');
       try {
-        final response = await _client.get(url);
+        final response = await _client.get(url).timeout(
+          const Duration(seconds: 10),
+          onTimeout: () => throw Exception('Timeout fetching $base'),
+        );
         if (response.statusCode == 404) continue;
         if (response.statusCode != 200) {
           lastError = 'HTTP ${response.statusCode} from $base';
@@ -54,7 +57,7 @@ class ProductResolutionService {
 
         final product = body['product'] as Map<String, dynamic>? ?? {};
         final resolved = _parse(barcode, product, url.toString());
-        await _cache.set(barcode, resolved);
+        await _cache.set(barcode, resolved, ttl: const Duration(hours: 24));
         return resolved;
       } on Exception catch (e) {
         lastError = e;
