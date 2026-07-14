@@ -1,3 +1,4 @@
+psql postgres://postgres:postgres123@localhost:5432/edc_db -f db/migrations/0002_recreate_edc_tables.sql
 -- Migration: 0002_recreate_edc_tables.sql
 -- Drops the placeholder schema from 0001 and creates the correct schema
 -- derived from the real edc_database.json and EdcEntry model.

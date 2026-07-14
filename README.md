@@ -68,7 +68,15 @@ Safe_basket/
 │   └── test/
 │       ├── product_resolution_service_test.dart
 │       └── ocr_service_test.dart
-│
+│──── gateway/                   # Node/Express auth gateway — sits between Flutter app and edc_backend
+│   ├── src/
+│   │   ├── index.js           # Entry point — Express app, health check
+│   │   ├── routes.js          # All proxied routes, all behind JWT auth
+│   │   ├── authMiddleware.js  # Verifies Bearer JWT, sets req.userId
+│   │   └── proxy.js           # Forwards to Dart backend, injects X-User-Id, unwraps envelope
+│   ├── package.json
+│   └── .env.example
+│ 
 └── edc_database.json          # Authoritative EDC reference data (source of truth)
 ```
 
@@ -80,6 +88,7 @@ Safe_basket/
 - [Dart Frog CLI](https://dartfrog.vgv.dev) — `dart pub global activate dart_frog_cli`
 - PostgreSQL >= 14
 - `psql` CLI available in PATH
+- Node.js >= 18 (for the gateway)
 
 ---
 
@@ -139,6 +148,13 @@ Server starts on the port defined in `.env` (default `8080`).
 
 ---
 
+### Gateway setup
+
+```bash
+cd gateway
+cp .env.example .env
+
+
 ## API
 
 All responses are wrapped in a standard envelope:
@@ -158,8 +174,8 @@ Errors:
 | Method | Path | Auth | Description |
 |--------|------|------|-------------|
 | `GET` | `/` | None | Health check |
-| `POST` | `/scan/barcode` | None | Resolve a product barcode via Open Food/Beauty/Products Facts |
-| `POST` | `/scan/photo` | None | OCR image upload → EDC match + risk assessment |
+| `POST` | `/scan/barcode` | JWT | Resolve a product barcode via Open Food/Beauty/Products Facts |
+| `POST` | `/scan/photo` | JWT | OCR image upload → EDC match + risk assessment |
 | `POST` | `/admin/edc` | Admin | Create a new EDC entry |
 | `PUT` | `/admin/edc/:id` | Admin | Update any field of an existing entry |
 | `POST` | `/admin/edc/:id/aliases` | Admin | Add an alias to an entry |
@@ -243,9 +259,11 @@ After every write the in-memory `EdcCache` is refreshed so `/scan/photo` immedia
 
 ## Authentication
 
-Routes read the `X-User-Id` header injected by an upstream auth gateway.
-Routes that don't need a user ignore a missing header — there is no global rejection.
-Admin routes return `403 forbidden` if the header is absent or not in `ADMIN_ALLOWLIST`.
+The gateway verifies a `Bearer` JWT in the `Authorization` header on every request. The `sub` (or `userId`/`id`) claim is extracted and forwarded to the Dart backend as `X-User-Id`.
+
+The Dart backend trusts `X-User-Id` as-is — it does not verify JWTs itself. Never expose the Dart backend port directly to clients.
+
+Admin routes return `403 forbidden` if `X-User-Id` is absent or not in `ADMIN_ALLOWLIST`.
 
 ---
 

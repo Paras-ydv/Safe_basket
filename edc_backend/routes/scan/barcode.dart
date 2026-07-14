@@ -1,6 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dart_frog/dart_frog.dart';
+import 'package:edc_matcher/edc_matcher.dart';
+import 'package:edc_backend/edc_repository/edc_cache.dart';
+import 'package:edc_backend/ocr/match_service.dart';
+import 'package:edc_backend/product_resolution/product_resolution.dart';
 import 'package:edc_backend/product_resolution/product_resolution_service.dart';
 import 'package:edc_backend/response_envelope.dart';
 
@@ -24,9 +28,9 @@ Future<Response> onRequest(RequestContext context) async {
 
   final service = context.read<ProductResolutionService>();
 
+  final ProductResolution product;
   try {
-    final result = await service.resolveBarcode(barcode.trim());
-    return okResponse(result.toJson());
+    product = await service.resolveBarcode(barcode.trim());
   } on ProductNotFoundException {
     return errorResponse('not_found', 'No product found for barcode $barcode.',
         statusCode: HttpStatus.notFound);
@@ -34,4 +38,31 @@ Future<Response> onRequest(RequestContext context) async {
     return errorResponse('network_error', e.message,
         statusCode: HttpStatus.badGateway);
   }
+
+  final requestId = context.request.headers['x-request-id'] ??
+      DateTime.now().microsecondsSinceEpoch.toString();
+
+  final entries = context.read<EdcCache>().entries;
+  final analysis = matchAndClassify(
+    product.ingredientsText,
+    entries,
+    requestId: requestId,
+  );
+
+  return okResponse({
+    'product': product.toJson(),
+    'matched_chemicals': analysis.matches
+        .map((e) => {
+              'id': e.id,
+              'name': e.name,
+              'severity': e.severity,
+              'evidence_tier': e.evidenceTier,
+              'draft_app_output_message': e.draftAppOutputMessage,
+            })
+        .toList(),
+    'risk_assessment': {
+      'worst_severity': analysis.worstSeverity,
+      'match_count': analysis.matches.length,
+    },
+  });
 }

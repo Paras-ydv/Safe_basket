@@ -9,7 +9,7 @@ dependencies:
   dart_frog: ^1.2.6
   dotenv: ^4.2.0
   http: ^1.2.0
-  mime: ^1.0.4
+  mime: ^1.0.6
   postgres: ^3.3.0
   edc_matcher:
     path: ../edc_matcher
@@ -17,3 +17,4 @@ dependencies:
 dev_dependencies:
   dart_frog_gen: ^2.1.0
   test: ^1.24.0
+  http: ^1.2.0

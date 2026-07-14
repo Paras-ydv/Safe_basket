@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:dart_frog/dart_frog.dart';
 import 'package:mime/mime.dart';
-import 'package:edc_matcher/edc_matcher.dart';
+import 'package:edc_backend/edc_repository/edc_cache.dart';
 import 'package:edc_backend/ocr/ocr_service.dart';
 import 'package:edc_backend/ocr/match_service.dart';
 import 'package:edc_backend/middleware/rate_limiter.dart';
@@ -48,9 +48,8 @@ Future<Response> onRequest(RequestContext context) async {
     return errorResponse('invalid_content_type', 'Missing multipart boundary.');
   }
 
-  final bodyBytes = await context.request.bytes();
   final parts = MimeMultipartTransformer(boundary)
-      .bind(Stream.value(bodyBytes))
+      .bind(context.request.bytes())
       .asBroadcastStream();
 
   List<int>? imageBytes;
@@ -83,7 +82,7 @@ Future<Response> onRequest(RequestContext context) async {
   }
 
   // ── Match + classify ──────────────────────────────────────────────────────
-  final entries = context.read<List<EdcEntry>>();
+  final entries = context.read<EdcCache>().entries;
   final result = matchAndClassify(
     cleanedText,
     entries,
