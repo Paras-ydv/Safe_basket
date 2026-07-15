@@ -169,6 +169,20 @@ class EdcRepository {
       referenceSourceUrl: c['reference_source_url'] as String?,
       draftAppOutputMessage: c['draft_app_output_message'] as String?,
       notes: c['notes'] as String?,
+      // AXIS 1 — ECHA (not yet in DB schema; safe defaults)
+      echaSvhcListed: false,
+      echaSvhcListingDate: null,
+      echaSvhcReason: null,
+      echaClpEdCategory: null,
+      echaModality: const [],
+      echaAssessmentOutcome: EchaAssessmentOutcome.notYetAssessed,
+      echaRegulatoryContext: EchaRegulatoryContext.outsideEchaScope,
+      echaLastUpdated: null,
+      // AXIS 2 — OECD (not yet in DB schema; safe defaults)
+      oecdEvidenceLevels: const [],
+      oecdEvidenceNotes: null,
+      // Meta
+      needsVerification: true,
     );
   }
 

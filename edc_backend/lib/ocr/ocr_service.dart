@@ -1,6 +1,5 @@
+import 'dart:io';
 import 'dart:async';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 
 class OcrFailedException implements Exception {
   const OcrFailedException(this.message);
@@ -13,82 +12,50 @@ class OcrNoTextException implements Exception {
 
 class OcrService {
   OcrService({
-    required this.apiKey,
-    http.Client? client,
-    this.timeout = const Duration(seconds: 15),
-  }) : _client = client ?? http.Client();
+    this.tesseractPath = r'C:\Program Files\Tesseract-OCR\tesseract.exe',
+    this.timeout = const Duration(seconds: 30),
+    Future<String> Function(List<int> imageBytes)? extractOverride,
+  }) : _extractOverride = extractOverride;
 
-  final String apiKey;
-  final http.Client _client;
+  final String tesseractPath;
   final Duration timeout;
-
-  static const _visionUrl =
-      'https://vision.googleapis.com/v1/images:annotate';
+  final Future<String> Function(List<int> imageBytes)? _extractOverride;
 
   Future<String> extractTextFromImage(List<int> imageBytes) async {
-    final base64Image = base64Encode(imageBytes);
+    if (_extractOverride != null) return _extractOverride!(imageBytes);
 
-    final http.Response response;
+    final tmpDir = Directory.systemTemp;
+    final tmpFile = File(
+        '${tmpDir.path}${Platform.pathSeparator}edc_ocr_${DateTime.now().microsecondsSinceEpoch}.jpg');
+
     try {
-      response = await _client
-          .post(
-            // API key is in the URL — do NOT echo the full URL in error
-            // messages or logs. Errors below use sanitised strings only.
-            Uri.parse('$_visionUrl?key=$apiKey'),
-            headers: {'Content-Type': 'application/json'},
-            body: jsonEncode({
-              'requests': [
-                {
-                  'image': {'content': base64Image},
-                  'features': [
-                    {'type': 'TEXT_DETECTION', 'maxResults': 1}
-                  ],
-                }
-              ]
-            }),
-          )
-          .timeout(timeout);
-    } on TimeoutException {
-      throw const OcrFailedException(
-          'Vision API timed out. Please try again.');
-    } on Exception catch (e) {
-      throw OcrFailedException('Vision API network error: $e');
+      await tmpFile.writeAsBytes(imageBytes);
+
+      final ProcessResult result;
+      try {
+        result = await Process.run(
+          tesseractPath,
+          [tmpFile.path, 'stdout', '-l', 'eng', '--psm', '3'],
+        ).timeout(timeout);
+      } on TimeoutException {
+        throw const OcrFailedException('Tesseract timed out.');
+      } on ProcessException catch (e) {
+        throw OcrFailedException('Tesseract process error: ${e.message}');
+      }
+
+      if (result.exitCode != 0) {
+        final stderr = (result.stderr as String).trim();
+        throw OcrFailedException(
+            'Tesseract exited with code ${result.exitCode}: $stderr');
+      }
+
+      final raw = (result.stdout as String).trim();
+      if (raw.isEmpty) throw const OcrNoTextException();
+
+      return _clean(raw);
+    } finally {
+      if (await tmpFile.exists()) await tmpFile.delete();
     }
-
-    if (response.statusCode != 200) {
-      // Do not include response.request?.url — it contains the API key.
-      throw OcrFailedException(
-          'Vision API returned HTTP ${response.statusCode}');
-    }
-
-    final Map<String, dynamic> body;
-    try {
-      body = jsonDecode(response.body) as Map<String, dynamic>;
-    } on FormatException {
-      throw const OcrFailedException('Vision API returned non-JSON response');
-    }
-
-    final responses = body['responses'] as List?;
-    if (responses == null || responses.isEmpty) {
-      throw const OcrFailedException(
-          'Vision API returned empty responses array');
-    }
-
-    final first = responses.first as Map<String, dynamic>;
-    if (first.containsKey('error')) {
-      final err = first['error'] as Map<String, dynamic>;
-      throw OcrFailedException(
-          err['message'] as String? ?? 'Unknown Vision API error');
-    }
-
-    final fullText = (first['fullTextAnnotation']
-        as Map<String, dynamic>?)?['text'] as String?;
-
-    if (fullText == null || fullText.trim().isEmpty) {
-      throw OcrNoTextException();
-    }
-
-    return _clean(fullText);
   }
 
   String _clean(String raw) {

@@ -38,7 +38,8 @@ class ProductResolutionService {
     Object? lastError;
 
     for (final base in _sources) {
-      final url = Uri.parse('$base/$barcode.json');
+      // &lc=en asks OFF to return English-localised fields where available.
+      final url = Uri.parse('$base/$barcode.json?lc=en');
       try {
         final response = await _client.get(url).timeout(
           const Duration(seconds: 10),
@@ -84,12 +85,37 @@ class ProductResolutionService {
         },
     };
 
+    // Prefer the explicit English field returned by OFF when &lc=en is used.
+    final enText = (p['ingredients_text_en'] as String? ?? '').trim();
+    final genericText = (p['ingredients_text'] as String? ?? '').trim();
+    // OFF's `lang` field is the product's primary language tag (e.g. 'en', 'fr').
+    final lang = (p['lang'] as String? ?? '').toLowerCase();
+
+    final String ingredientsText;
+    final bool isEnglish;
+
+    if (enText.isNotEmpty) {
+      // Explicit English field present — use it unconditionally.
+      ingredientsText = enText;
+      isEnglish = true;
+    } else if (genericText.isNotEmpty && lang == 'en') {
+      // No dedicated English field, but the product's primary language is
+      // English, so the generic field is English.
+      ingredientsText = genericText;
+      isEnglish = true;
+    } else {
+      // Either no ingredients text at all, or text exists but is non-English.
+      ingredientsText = '';
+      isEnglish = false;
+    }
+
     return ProductResolution(
       barcode: barcode,
       name: (p['product_name'] as String? ?? '').trim(),
       brand: (p['brands'] as String? ?? '').trim(),
       imageUrl: p['image_url'] as String?,
-      ingredientsText: (p['ingredients_text'] as String? ?? '').trim(),
+      ingredientsText: ingredientsText,
+      ingredientsTextIsEnglish: isEnglish,
       packagingMaterials: packaging,
       sourceUrl: sourceUrl,
     );

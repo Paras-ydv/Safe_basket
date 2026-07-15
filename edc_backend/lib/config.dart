@@ -4,16 +4,14 @@ import 'package:postgres/postgres.dart';
 class AppConfig {
   AppConfig._({
     required this.dbConnectionString,
-    required this.ocrApiKey,
-    required this.ocrApiUrl,
     required this.port,
     required this.adminAllowlist,
+    required this.tesseractPath,
   });
 
   final String dbConnectionString;
-  final String ocrApiKey;
-  final String ocrApiUrl;
   final int port;
+  final String tesseractPath;
 
   /// Comma-separated user IDs permitted to call /admin/* routes.
   /// TODO: replace with real role-based auth (e.g. JWT claims / Supabase roles).
@@ -29,10 +27,10 @@ class AppConfig {
         .toSet();
     return AppConfig._(
       dbConnectionString: env['DB_CONNECTION_STRING'] ?? '',
-      ocrApiKey: env['OCR_API_KEY'] ?? '',
-      ocrApiUrl: env['OCR_API_URL'] ?? '',
       port: int.tryParse(env['PORT'] ?? '8080') ?? 8080,
       adminAllowlist: allowlist,
+      tesseractPath: env['TESSERACT_PATH'] ??
+          r'C:\Program Files\Tesseract-OCR\tesseract.exe',
     );
   }
 

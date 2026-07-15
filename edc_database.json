@@ -8,8 +8,17 @@
       "id": "bpa",
       "name": "Bisphenol A",
       "abbreviation": "BPA",
-      "aliases": ["bpa", "bisphenol a", "bisphenol-a", "4,4'-isopropylidenediphenol"],
-      "commonSources": ["plastic bottles", "food containers", "canned food linings"],
+      "aliases": [
+        "bpa",
+        "bisphenol a",
+        "bisphenol-a",
+        "4,4'-isopropylidenediphenol"
+      ],
+      "commonSources": [
+        "plastic bottles",
+        "food containers",
+        "canned food linings"
+      ],
       "scanMethod": "Barcode / product label",
       "appDetectionMethod": "Ingredient database matching (AI OCR + barcode API)",
       "labConfirmationMethod": "LC-MS/MS (urinary BPA)",
@@ -19,18 +28,25 @@
       "pediatricHarms": "Precocious puberty, obesity risk, behavioral disorders",
       "adultHarms": "Metabolic syndrome, reproductive dysfunction",
       "guidelineValue": "0.2 ng/kg/day (extremely low)",
-      "guidelineAuthority": "EFSA 2023 TDI",
-      "referenceRange": "7.9–521.8 ng/L (water)",
-      "referenceSourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10424550/",
-      "draftAppOutputMessage": "High EDC risk — estrogenic chemical detected",
+      "guidelineAuthority": "EFSA TDI (EFSA Journal 2023;21(4):6857)",
+      "referenceRange": "7.9\u2013521.8 ng/L (water)",
+      "referenceSourceUrl": "https://efsa.onlinelibrary.wiley.com/doi/10.2903/j.efsa.2023.6857",
+      "draftAppOutputMessage": "High EDC risk \u2014 estrogenic chemical detected",
       "notes": "Also linked to infertility, obesity, diabetes in the broader severity table (High)."
     },
     {
       "id": "phthalates_general",
       "name": "Phthalates (general family)",
       "abbreviation": null,
-      "aliases": ["phthalate", "phthalates"],
-      "commonSources": ["plastics", "cosmetics", "vinyl products"],
+      "aliases": [
+        "phthalate",
+        "phthalates"
+      ],
+      "commonSources": [
+        "plastics",
+        "cosmetics",
+        "vinyl products"
+      ],
       "scanMethod": null,
       "appDetectionMethod": null,
       "labConfirmationMethod": "Urinary metabolites (LC-MS/MS)",
@@ -41,17 +57,23 @@
       "adultHarms": "Reproductive defects",
       "guidelineValue": null,
       "guidelineAuthority": null,
-      "referenceRange": "Urinary metabolites, µg/L (varies)",
+      "referenceRange": "Urinary metabolites, \u00b5g/L (varies)",
       "referenceSourceUrl": null,
-      "draftAppOutputMessage": "Endocrine disruptor — reproductive risk",
+      "draftAppOutputMessage": "Endocrine disruptor \u2014 reproductive risk",
       "notes": "Umbrella family; see also dep and bis_2_propylheptyl_phthalate for specific esters."
     },
     {
-      "id": "dep",
-      "name": "Diethyl Phthalate",
-      "abbreviation": "DEP",
-      "aliases": ["dep", "diethyl phthalate"],
-      "commonSources": ["perfumes", "cosmetics"],
+      "id": "dbp",
+      "name": "Di-n-butyl phthalate (DBP)",
+      "abbreviation": "DBP",
+      "aliases": [
+        "dep",
+        "diethyl phthalate"
+      ],
+      "commonSources": [
+        "perfumes",
+        "cosmetics"
+      ],
       "scanMethod": "Label scan",
       "appDetectionMethod": "OCR + ingredient parsing",
       "labConfirmationMethod": "LC-MS/MS",
@@ -64,15 +86,20 @@
       "guidelineAuthority": "EFSA",
       "referenceRange": null,
       "referenceSourceUrl": null,
-      "draftAppOutputMessage": "High concern — anti-androgenic chemical",
+      "draftAppOutputMessage": "High concern \u2014 anti-androgenic chemical",
       "notes": "Specific ester within the phthalates family; also appears generically as 'DEP, DBP' in the detection table."
     },
     {
       "id": "bis_2_propylheptyl_phthalate",
       "name": "Bis(2-propylheptyl) phthalate",
       "abbreviation": null,
-      "aliases": ["bis(2-propylheptyl) phthalate", "dphp"],
-      "commonSources": ["plastics"],
+      "aliases": [
+        "bis(2-propylheptyl) phthalate",
+        "dphp"
+      ],
+      "commonSources": [
+        "plastics"
+      ],
       "scanMethod": null,
       "appDetectionMethod": null,
       "labConfirmationMethod": null,
@@ -81,19 +108,29 @@
       "mechanism": "Anti-androgenic activity",
       "pediatricHarms": "Reproductive tract developmental effects",
       "adultHarms": "Fertility impairment",
-      "guidelineValue": "Phthalate group TDI applied",
+      "guidelineValue": null,
       "guidelineAuthority": null,
       "referenceRange": null,
       "referenceSourceUrl": null,
       "draftAppOutputMessage": null,
-      "notes": null
+      "notes": null,
+      "needsVerification": true
     },
     {
       "id": "methylparaben",
       "name": "Methylparaben",
       "abbreviation": null,
-      "aliases": ["methylparaben", "paraben", "parabens", "propylparaben", "butylparaben"],
-      "commonSources": ["personal care products", "cosmetics"],
+      "aliases": [
+        "methylparaben",
+        "paraben",
+        "parabens",
+        "propylparaben",
+        "butylparaben"
+      ],
+      "commonSources": [
+        "personal care products",
+        "cosmetics"
+      ],
       "scanMethod": "Product label scan",
       "appDetectionMethod": "Keyword detection (paraben family)",
       "labConfirmationMethod": "LC-MS/MS",
@@ -102,10 +139,10 @@
       "mechanism": "Weak estrogenic activity",
       "pediatricHarms": "Early breast development (limited evidence)",
       "adultHarms": "Hormonal imbalance (weak evidence)",
-      "guidelineValue": "≤0.4% cosmetic limit",
-      "guidelineAuthority": "Acceptable cosmetic limit",
+      "guidelineValue": "\u22640.4% cosmetic limit",
+      "guidelineAuthority": "SCCS/1697/23 (2023-12-15)",
       "referenceRange": "Low environmental levels",
-      "referenceSourceUrl": null,
+      "referenceSourceUrl": "https://health.ec.europa.eu/publications/methylparaben-cas-no-99-76-3-ec-no-202-785-7_en",
       "draftAppOutputMessage": "Weak estrogenic activity detected",
       "notes": "'Parabens' broadly classified Low in the severity table; this entry (methylparaben) is Low-Moderate per the clinical-harms table."
     },
@@ -113,8 +150,14 @@
       "id": "tbbpa",
       "name": "Tetrabromobisphenol A",
       "abbreviation": "TBBPA",
-      "aliases": ["tbbpa", "tetrabromobisphenol a"],
-      "commonSources": ["electronics", "e-waste"],
+      "aliases": [
+        "tbbpa",
+        "tetrabromobisphenol a"
+      ],
+      "commonSources": [
+        "electronics",
+        "e-waste"
+      ],
       "scanMethod": "Device type / category",
       "appDetectionMethod": "Database mapping (material composition)",
       "labConfirmationMethod": "GC-MS / LC-MS",
@@ -123,19 +166,24 @@
       "mechanism": "Thyroid hormone disruption",
       "pediatricHarms": "Thyroid dysfunction, neurodevelopmental risk",
       "adultHarms": "Thyroid imbalance",
-      "guidelineValue": "No global TDI; monitored",
+      "guidelineValue": null,
       "guidelineAuthority": null,
       "referenceRange": null,
       "referenceSourceUrl": null,
       "draftAppOutputMessage": "Flame retardant with thyroid disruption risk",
-      "notes": null
+      "notes": null,
+      "needsVerification": true
     },
     {
       "id": "tetramethrin",
       "name": "Tetramethrin",
       "abbreviation": null,
-      "aliases": ["tetramethrin"],
-      "commonSources": ["mosquito repellents"],
+      "aliases": [
+        "tetramethrin"
+      ],
+      "commonSources": [
+        "mosquito repellents"
+      ],
       "scanMethod": "Product barcode",
       "appDetectionMethod": "Barcode lookup + pesticide database",
       "labConfirmationMethod": "GC-MS (metabolites)",
@@ -144,40 +192,52 @@
       "mechanism": "Sodium channel neurotoxicity; possible neuroendocrine modulation",
       "pediatricHarms": "Neurodevelopmental delay (high exposure), behavioral changes, asthma exacerbation",
       "adultHarms": "Neurotoxicity, paresthesia, endocrine modulation (limited evidence)",
-      "guidelineValue": "~0.02 mg/kg/day (class-based)",
-      "guidelineAuthority": "WHO ADI",
+      "guidelineValue": null,
+      "guidelineAuthority": null,
       "referenceRange": null,
       "referenceSourceUrl": null,
       "draftAppOutputMessage": "Neuro-endocrine risk in children",
-      "notes": "Pyrethroid class."
+      "notes": "Pyrethroid class.",
+      "needsVerification": true
     },
     {
       "id": "perchlorate",
       "name": "Perchlorate (incl. Ammonium Perchlorate)",
       "abbreviation": null,
-      "aliases": ["perchlorate", "ammonium perchlorate"],
-      "commonSources": ["drinking water"],
+      "aliases": [
+        "perchlorate",
+        "ammonium perchlorate"
+      ],
+      "commonSources": [
+        "drinking water"
+      ],
       "scanMethod": "Location / water source",
       "appDetectionMethod": "GIS + environmental database",
       "labConfirmationMethod": "Ion chromatography",
       "severity": "High",
       "evidenceTier": "Strong",
-      "mechanism": "Inhibits iodine uptake → thyroid hormone suppression",
+      "mechanism": "Inhibits iodine uptake \u2192 thyroid hormone suppression",
       "pediatricHarms": "Hypothyroidism, impaired neurodevelopment and growth delay",
       "adultHarms": "Thyroid dysfunction, subclinical hypothyroidism",
       "guidelineValue": "0.0007 mg/kg/day (US EPA RfD); 0.07 mg/L (WHO provisional, India water-exposure context)",
       "guidelineAuthority": "US EPA / WHO",
       "referenceRange": null,
-      "referenceSourceUrl": null,
+      "referenceSourceUrl": "EPA: https://www.epa.gov/archive/epapages/newsroom_archive/newsreleases/c1a57d2077c4bfda85256fac005b8b32.html ; WHO: WHO/SDE/FWC/16.46",
       "draftAppOutputMessage": "Thyroid disruption risk in water",
-      "notes": "Listed twice in the clinical-harms table (as 'Ammonium Perchlorate' and 'Perchlorate — water exposure context in India'); merged here."
+      "notes": "Listed twice in the clinical-harms table (as 'Ammonium Perchlorate' and 'Perchlorate \u2014 water exposure context in India'); merged here. EPA proposed a new drinking-water MCLG of 0.02 mg/L (20 \u00b5g/L) as of Jan 2026 (docket EPA-HQ-OW-2024-0592); not yet finalized, current RfD unchanged"
     },
     {
       "id": "galaxolide",
       "name": "Galaxolide (synthetic musk)",
       "abbreviation": "HHCB",
-      "aliases": ["galaxolide", "hhcb"],
-      "commonSources": ["fragrances", "detergents"],
+      "aliases": [
+        "galaxolide",
+        "hhcb"
+      ],
+      "commonSources": [
+        "fragrances",
+        "detergents"
+      ],
       "scanMethod": "Product scan",
       "appDetectionMethod": "AI fragrance database mapping",
       "labConfirmationMethod": "LC-MS/MS",
@@ -186,19 +246,26 @@
       "mechanism": "Bioaccumulation; possible estrogenic action",
       "pediatricHarms": "Accumulation in adipose tissue",
       "adultHarms": "Endocrine modulation (experimental evidence)",
-      "guidelineValue": "No established TDI; monitored",
+      "guidelineValue": null,
       "guidelineAuthority": null,
       "referenceRange": null,
       "referenceSourceUrl": null,
       "draftAppOutputMessage": "Bioaccumulative EDC warning",
-      "notes": null
+      "notes": null,
+      "needsVerification": true
     },
     {
       "id": "bht",
       "name": "Butylated Hydroxytoluene",
       "abbreviation": "BHT",
-      "aliases": ["bht", "2,6-di-tert-butyl-p-cresol", "butylated hydroxytoluene"],
-      "commonSources": ["packaged food"],
+      "aliases": [
+        "bht",
+        "2,6-di-tert-butyl-p-cresol",
+        "butylated hydroxytoluene"
+      ],
+      "commonSources": [
+        "packaged food"
+      ],
       "scanMethod": "Barcode scan",
       "appDetectionMethod": "Food additive database (INS/E numbers)",
       "labConfirmationMethod": "GC-MS / LC-MS",
@@ -207,10 +274,10 @@
       "mechanism": "Oxidative stress; weak endocrine interaction",
       "pediatricHarms": "Possible hyperactivity (controversial)",
       "adultHarms": "Liver enzyme elevation (high dose)",
-      "guidelineValue": "0–0.3 mg/kg/day",
+      "guidelineValue": "0\u20130.3 mg/kg/day",
       "guidelineAuthority": "JECFA ADI",
       "referenceRange": null,
-      "referenceSourceUrl": null,
+      "referenceSourceUrl": "JECFA 51st meeting (1996)",
       "draftAppOutputMessage": "Moderate endocrine interaction",
       "notes": null
     },
@@ -218,8 +285,12 @@
       "id": "resorcinol",
       "name": "Resorcinol",
       "abbreviation": null,
-      "aliases": ["resorcinol"],
-      "commonSources": ["hair dyes"],
+      "aliases": [
+        "resorcinol"
+      ],
+      "commonSources": [
+        "hair dyes"
+      ],
       "scanMethod": "Label scan",
       "appDetectionMethod": "OCR + cosmetic ingredient DB",
       "labConfirmationMethod": "LC-MS/MS",
@@ -228,19 +299,27 @@
       "mechanism": "Thyroid peroxidase inhibition",
       "pediatricHarms": "Goiter risk (high exposure), thyroid imbalance",
       "adultHarms": "Thyroid dysfunction",
-      "guidelineValue": "≤1.25% topical use",
+      "guidelineValue": "\u22641.25% topical use",
       "guidelineAuthority": "Cosmetic safety limit",
       "referenceRange": null,
       "referenceSourceUrl": null,
       "draftAppOutputMessage": "Thyroid interference risk",
-      "notes": null
+      "notes": null,
+      "needsVerification": true
     },
     {
       "id": "heavy_metals_cu_pb",
       "name": "Heavy Metals (Copper, Lead)",
       "abbreviation": null,
-      "aliases": ["heavy metals", "copper", "lead"],
-      "commonSources": ["water", "pipes"],
+      "aliases": [
+        "heavy metals",
+        "copper",
+        "lead"
+      ],
+      "commonSources": [
+        "water",
+        "pipes"
+      ],
       "scanMethod": "Water source / kit input",
       "appDetectionMethod": "IoT sensor + manual entry",
       "labConfirmationMethod": "ICP-MS",
@@ -249,19 +328,24 @@
       "mechanism": "Oxidative stress; excess affects endocrine balance (copper); neurodevelopmental toxicity (lead)",
       "pediatricHarms": "GI toxicity, liver damage (high exposure); neurodevelopmental delay",
       "adultHarms": "Hepatotoxicity; Wilson-like effects",
-      "guidelineValue": "Copper: 2 mg/L; Lead (blood): >5 µg/dL unsafe",
-      "guidelineAuthority": "WHO drinking water limit / blood lead reference",
+      "guidelineValue": "Copper: 2 mg/L; Lead (blood): \u22653.5 \u00b5g/dL (CDC BLRV, 2021)",
+      "guidelineAuthority": "WHO drinking water guideline / CDC BLRV (2021)",
       "referenceRange": null,
-      "referenceSourceUrl": null,
+      "referenceSourceUrl": "Copper: https://cdn.who.int/media/docs/default-source/wash-documents/wash-chemicals/copper.pdf",
       "draftAppOutputMessage": "Toxic metal exposure risk",
-      "notes": "Copper and lead are tracked as separate entries (copper, lead) below with their own severity-table rows; this combined entry mirrors the detection-table row as originally written."
+      "notes": "Copper and lead are tracked as separate entries (copper, lead) below with their own severity-table rows; this combined entry mirrors the detection-table row as originally written. No blood lead level is considered fully safe \u2014 BLRV is a screening/surveillance threshold, not a safety cutoff."
     },
     {
       "id": "pyrethroids_general",
       "name": "Pyrethroids (general)",
       "abbreviation": null,
-      "aliases": ["pyrethroid", "pyrethroids"],
-      "commonSources": ["household sprays"],
+      "aliases": [
+        "pyrethroid",
+        "pyrethroids"
+      ],
+      "commonSources": [
+        "household sprays"
+      ],
       "scanMethod": "Barcode / product type",
       "appDetectionMethod": "Pesticide classification database",
       "labConfirmationMethod": "GC-MS",
@@ -281,8 +365,13 @@
       "id": "copper",
       "name": "Copper",
       "abbreviation": "Cu",
-      "aliases": ["copper"],
-      "commonSources": ["drinking water", "pipes"],
+      "aliases": [
+        "copper"
+      ],
+      "commonSources": [
+        "drinking water",
+        "pipes"
+      ],
       "scanMethod": null,
       "appDetectionMethod": null,
       "labConfirmationMethod": "ICP-MS",
@@ -294,7 +383,7 @@
       "guidelineValue": "2 mg/L",
       "guidelineAuthority": "WHO drinking water limit",
       "referenceRange": null,
-      "referenceSourceUrl": null,
+      "referenceSourceUrl": "https://cdn.who.int/media/docs/default-source/wash-documents/wash-chemicals/copper.pdf",
       "draftAppOutputMessage": null,
       "notes": null
     },
@@ -302,8 +391,13 @@
       "id": "peracetic_acid",
       "name": "Peracetic acid",
       "abbreviation": null,
-      "aliases": ["peracetic acid"],
-      "commonSources": ["disinfectants", "occupational settings"],
+      "aliases": [
+        "peracetic acid"
+      ],
+      "commonSources": [
+        "disinfectants",
+        "occupational settings"
+      ],
       "scanMethod": null,
       "appDetectionMethod": null,
       "labConfirmationMethod": null,
@@ -312,19 +406,25 @@
       "mechanism": "Strong oxidizer (not endocrine)",
       "pediatricHarms": "Respiratory irritation",
       "adultHarms": "Respiratory irritation",
-      "guidelineValue": "Occupational exposure limits apply",
+      "guidelineValue": null,
       "guidelineAuthority": null,
       "referenceRange": null,
       "referenceSourceUrl": null,
       "draftAppOutputMessage": null,
-      "notes": "Included in the source clinical-harms table but explicitly flagged there as a non-endocrine irritant risk, not an EDC. Kept for completeness — exclude from EDC-specific risk scoring."
+      "notes": "Included in the source clinical-harms table but explicitly flagged there as a non-endocrine irritant risk, not an EDC. Kept for completeness \u2014 exclude from EDC-specific risk scoring.",
+      "needsVerification": true
     },
     {
       "id": "alphachloralose",
       "name": "Alphachloralose",
       "abbreviation": null,
-      "aliases": ["alphachloralose", "alpha-chloralose"],
-      "commonSources": ["rodenticides"],
+      "aliases": [
+        "alphachloralose",
+        "alpha-chloralose"
+      ],
+      "commonSources": [
+        "rodenticides"
+      ],
       "scanMethod": null,
       "appDetectionMethod": null,
       "labConfirmationMethod": null,
@@ -333,19 +433,26 @@
       "mechanism": "CNS depressant",
       "pediatricHarms": "Seizures (poisoning cases)",
       "adultHarms": "CNS depression",
-      "guidelineValue": "No ADI established",
+      "guidelineValue": null,
       "guidelineAuthority": null,
       "referenceRange": null,
       "referenceSourceUrl": null,
       "draftAppOutputMessage": null,
-      "notes": "Acute toxicity risk, not a chronic endocrine-disruption profile — flag separately from EDC risk scoring."
+      "notes": "Acute toxicity risk, not a chronic endocrine-disruption profile \u2014 flag separately from EDC risk scoring.",
+      "needsVerification": true
     },
     {
       "id": "phenolic_antioxidants",
       "name": "Phenolic antioxidants (methylenedi-xylenol derivatives)",
       "abbreviation": null,
-      "aliases": ["phenolic antioxidants", "methylenedi-xylenol"],
-      "commonSources": ["plastics", "rubber additives"],
+      "aliases": [
+        "phenolic antioxidants",
+        "methylenedi-xylenol"
+      ],
+      "commonSources": [
+        "plastics",
+        "rubber additives"
+      ],
       "scanMethod": null,
       "appDetectionMethod": null,
       "labConfirmationMethod": null,
@@ -354,19 +461,27 @@
       "mechanism": "Potential estrogen receptor binding (theoretical)",
       "pediatricHarms": "Limited human evidence",
       "adultHarms": "Limited human evidence",
-      "guidelineValue": "No formal TDI",
+      "guidelineValue": null,
       "guidelineAuthority": null,
       "referenceRange": null,
       "referenceSourceUrl": null,
       "draftAppOutputMessage": null,
-      "notes": null
+      "notes": null,
+      "needsVerification": true
     },
     {
       "id": "silver_antimicrobials",
       "name": "Silver-based antimicrobials",
       "abbreviation": null,
-      "aliases": ["silver", "colloidal silver", "silver antimicrobial"],
-      "commonSources": ["antimicrobial coatings", "drinking water treatment"],
+      "aliases": [
+        "silver",
+        "colloidal silver",
+        "silver antimicrobial"
+      ],
+      "commonSources": [
+        "antimicrobial coatings",
+        "drinking water treatment"
+      ],
       "scanMethod": null,
       "appDetectionMethod": null,
       "labConfirmationMethod": null,
@@ -376,9 +491,9 @@
       "pediatricHarms": "Rare systemic toxicity",
       "adultHarms": "Argyria (skin discoloration)",
       "guidelineValue": "0.1 mg/L (drinking water)",
-      "guidelineAuthority": "WHO silver guideline",
+      "guidelineAuthority": "WHO provisional reference value (2021)",
       "referenceRange": null,
-      "referenceSourceUrl": null,
+      "referenceSourceUrl": "WHO/HEP/ECH/WSH/2021.7",
       "draftAppOutputMessage": null,
       "notes": "Low systemic endocrine risk per source table."
     },
@@ -386,511 +501,880 @@
       "id": "dioxins",
       "name": "Dioxins",
       "abbreviation": null,
-      "aliases": ["dioxin", "dioxins"],
-      "commonSources": ["industrial byproducts", "food chain bioaccumulation"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "dioxin",
+        "dioxins"
+      ],
+      "commonSources": [
+        "industrial byproducts",
+        "food chain bioaccumulation"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "High",
       "evidenceTier": "Strong",
-      "mechanism": null,
+      "mechanism": "Activates the aryl hydrocarbon receptor (AhR), altering transcription of genes involved in hormone signalling and development. Persistent AhR activation can disrupt estrogen, androgen, and thyroid hormone pathways.",
       "pediatricHarms": null,
       "adultHarms": "Cancer, immune suppression",
-      "guidelineValue": null, "guidelineAuthority": null,
+      "guidelineValue": null,
+      "guidelineAuthority": null,
       "referenceRange": "Very low ppt levels considered toxic",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": null
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": null
     },
     {
       "id": "pcbs",
       "name": "Polychlorinated Biphenyls",
       "abbreviation": "PCBs",
-      "aliases": ["pcb", "pcbs", "polychlorinated biphenyls"],
-      "commonSources": ["legacy electrical equipment", "contaminated food chain"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "pcb",
+        "pcbs",
+        "polychlorinated biphenyls"
+      ],
+      "commonSources": [
+        "legacy electrical equipment",
+        "contaminated food chain"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "High",
       "evidenceTier": "Strong",
-      "mechanism": null,
+      "mechanism": "Interfere with thyroid hormone transport and metabolism while some congeners activate the aryl hydrocarbon receptor. These actions contribute to neurodevelopmental and endocrine effects.",
       "pediatricHarms": "Developmental delay",
       "adultHarms": "Neurotoxicity",
-      "guidelineValue": null, "guidelineAuthority": null,
+      "guidelineValue": null,
+      "guidelineAuthority": null,
       "referenceRange": "Bioaccumulative (lipid-based)",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": null
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": null
     },
     {
       "id": "pfas",
       "name": "Per- and Polyfluoroalkyl Substances",
       "abbreviation": "PFAS",
-      "aliases": ["pfas", "pfoa", "forever chemicals"],
-      "commonSources": ["non-stick cookware", "water-resistant textiles", "food packaging"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "pfas",
+        "pfoa",
+        "forever chemicals"
+      ],
+      "commonSources": [
+        "non-stick cookware",
+        "water-resistant textiles",
+        "food packaging"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "High",
       "evidenceTier": "Strong",
-      "mechanism": null,
+      "mechanism": "Activate peroxisome proliferator-activated receptors (especially PPAR\u03b1) and interfere with thyroid hormone homeostasis. They also alter lipid metabolism and endocrine signalling.",
       "pediatricHarms": null,
       "adultHarms": "Thyroid dysfunction, cancer",
-      "guidelineValue": null, "guidelineAuthority": null,
-      "referenceRange": "43–519 ng/L (water, PFOA)",
+      "guidelineValue": null,
+      "guidelineAuthority": null,
+      "referenceRange": "43\u2013519 ng/L (water, PFOA)",
       "referenceSourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10424550/",
-      "draftAppOutputMessage": null, "notes": null
+      "draftAppOutputMessage": null,
+      "notes": null
     },
     {
       "id": "pfos",
       "name": "Perfluorooctane sulfonate",
       "abbreviation": "PFOS",
-      "aliases": ["pfos", "perfluorooctane sulfonate"],
-      "commonSources": ["firefighting foam", "textile treatments"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "pfos",
+        "perfluorooctane sulfonate"
+      ],
+      "commonSources": [
+        "firefighting foam",
+        "textile treatments"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "High",
       "evidenceTier": "Strong",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "Activates PPAR-mediated pathways and disrupts thyroid hormone transport and metabolism. Persistent exposure alters immune and endocrine function.",
+      "pediatricHarms": null,
       "adultHarms": "Immune and endocrine effects",
-      "guidelineValue": null, "guidelineAuthority": null,
+      "guidelineValue": null,
+      "guidelineAuthority": null,
       "referenceRange": "ng/L",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": null
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": null
     },
     {
       "id": "atrazine",
       "name": "Atrazine",
       "abbreviation": null,
-      "aliases": ["atrazine"],
-      "commonSources": ["agricultural herbicide runoff", "groundwater"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "atrazine"
+      ],
+      "commonSources": [
+        "agricultural herbicide runoff",
+        "groundwater"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "Moderate",
       "evidenceTier": "Moderate",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "Increases aromatase expression, promoting conversion of androgens to estrogens. It can also disturb hypothalamic-pituitary-gonadal hormone regulation.",
+      "pediatricHarms": null,
       "adultHarms": "Reproductive toxicity",
-      "guidelineValue": null, "guidelineAuthority": null,
-      "referenceRange": "µg/L in groundwater",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": null
+      "guidelineValue": null,
+      "guidelineAuthority": null,
+      "referenceRange": "\u00b5g/L in groundwater",
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": null
     },
     {
       "id": "triclosan",
       "name": "Triclosan",
       "abbreviation": null,
-      "aliases": ["triclosan"],
-      "commonSources": ["antibacterial soaps", "personal care products"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "triclosan"
+      ],
+      "commonSources": [
+        "antibacterial soaps",
+        "personal care products"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "Moderate",
       "evidenceTier": "Moderate",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "Interferes with thyroid hormone signalling and can reduce thyroid hormone availability. Weak interactions with estrogen and androgen pathways have also been reported.",
+      "pediatricHarms": null,
       "adultHarms": "Thyroid disruption",
-      "guidelineValue": null, "guidelineAuthority": null,
-      "referenceRange": "µg/L (urine/plasma)",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": null
+      "guidelineValue": null,
+      "guidelineAuthority": null,
+      "referenceRange": "\u00b5g/L (urine/plasma)",
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": null
     },
     {
       "id": "pbdes",
       "name": "Polybrominated Diphenyl Ethers",
       "abbreviation": "PBDEs",
-      "aliases": ["pbde", "pbdes", "polybrominated diphenyl ethers"],
-      "commonSources": ["flame-retardant foams", "electronics"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "pbde",
+        "pbdes",
+        "polybrominated diphenyl ethers"
+      ],
+      "commonSources": [
+        "flame-retardant foams",
+        "electronics"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "High",
       "evidenceTier": "Strong",
-      "mechanism": null, "pediatricHarms": "Neurodevelopmental delay",
+      "mechanism": "Disrupt thyroid hormone transport by competing with thyroxine-binding proteins and altering hormone metabolism. This can impair brain development during early life.",
+      "pediatricHarms": "Neurodevelopmental delay",
       "adultHarms": null,
-      "guidelineValue": null, "guidelineAuthority": null,
+      "guidelineValue": null,
+      "guidelineAuthority": null,
       "referenceRange": "Persistent in fat tissue",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": null
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": null
     },
     {
       "id": "nonylphenol",
       "name": "Nonylphenol",
       "abbreviation": null,
-      "aliases": ["nonylphenol"],
-      "commonSources": ["detergents", "plastics"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "nonylphenol"
+      ],
+      "commonSources": [
+        "detergents",
+        "plastics"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "High",
       "evidenceTier": "Strong",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "Acts as a xenoestrogen by binding and activating estrogen receptors. It also alters reproductive hormone signalling.",
+      "pediatricHarms": null,
       "adultHarms": "Estrogenic activity",
-      "guidelineValue": null, "guidelineAuthority": null,
-      "referenceRange": "12–547 ng/L",
+      "guidelineValue": null,
+      "guidelineAuthority": null,
+      "referenceRange": "12\u2013547 ng/L",
       "referenceSourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10424550/",
-      "draftAppOutputMessage": null, "notes": null
+      "draftAppOutputMessage": null,
+      "notes": null
     },
     {
       "id": "alkylphenols",
       "name": "Alkylphenols",
       "abbreviation": null,
-      "aliases": ["alkylphenol", "alkylphenols"],
-      "commonSources": ["industrial surfactants"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "alkylphenol",
+        "alkylphenols"
+      ],
+      "commonSources": [
+        "industrial surfactants"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "Moderate",
       "evidenceTier": "Moderate",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "Bind estrogen receptors as weak agonists and interfere with endocrine signalling. Chronic exposure may affect reproductive hormone balance.",
+      "pediatricHarms": null,
       "adultHarms": "Hormone disruption",
-      "guidelineValue": null, "guidelineAuthority": null,
+      "guidelineValue": null,
+      "guidelineAuthority": null,
       "referenceRange": "Environmental ng/L",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": null
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": null
     },
     {
       "id": "ddt_dde",
       "name": "DDT/DDE",
       "abbreviation": null,
-      "aliases": ["ddt", "dde"],
-      "commonSources": ["legacy pesticide residue"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "ddt",
+        "dde"
+      ],
+      "commonSources": [
+        "legacy pesticide residue"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "High",
       "evidenceTier": "Strong",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "DDT exhibits estrogenic activity, while DDE acts primarily as an androgen receptor antagonist. Together they disrupt reproductive hormone signalling.",
+      "pediatricHarms": null,
       "adultHarms": "Reproductive toxicity",
-      "guidelineValue": null, "guidelineAuthority": null,
+      "guidelineValue": null,
+      "guidelineAuthority": null,
       "referenceRange": "Persistent, bioaccumulative",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": null
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": null
     },
     {
       "id": "vinclozolin",
       "name": "Vinclozolin",
       "abbreviation": null,
-      "aliases": ["vinclozolin"],
-      "commonSources": ["agricultural fungicide"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "vinclozolin"
+      ],
+      "commonSources": [
+        "agricultural fungicide"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "Moderate",
       "evidenceTier": "Moderate",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "Its metabolites act as androgen receptor antagonists, blocking androgen signalling during development. This mechanism underlies reproductive toxicity.",
+      "pediatricHarms": null,
       "adultHarms": "Antiandrogenic effects",
-      "guidelineValue": null, "guidelineAuthority": null,
+      "guidelineValue": null,
+      "guidelineAuthority": null,
       "referenceRange": "Agricultural exposure",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": null
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": null
     },
     {
       "id": "methoxychlor",
       "name": "Methoxychlor",
       "abbreviation": null,
-      "aliases": ["methoxychlor"],
-      "commonSources": ["legacy pesticide"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "methoxychlor"
+      ],
+      "commonSources": [
+        "legacy pesticide"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "Moderate",
       "evidenceTier": "Moderate",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "Metabolites interact with estrogen receptors and reduce androgen signalling. These effects alter reproductive endocrine function.",
+      "pediatricHarms": null,
       "adultHarms": "Estrogenic effects",
-      "guidelineValue": null, "guidelineAuthority": null,
+      "guidelineValue": null,
+      "guidelineAuthority": null,
       "referenceRange": "Soil/water exposure",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": null
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": null
     },
     {
       "id": "glyphosate",
       "name": "Glyphosate",
       "abbreviation": null,
-      "aliases": ["glyphosate"],
-      "commonSources": ["herbicides"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "glyphosate"
+      ],
+      "commonSources": [
+        "herbicides"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "Low-Moderate",
       "evidenceTier": "Limited",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "Proposed to interfere with steroid hormone synthesis and aromatase activity at some exposure conditions. Endocrine effects remain less consistently established than for classical EDCs.",
+      "pediatricHarms": null,
       "adultHarms": "Possible endocrine effects",
-      "guidelineValue": null, "guidelineAuthority": null,
-      "referenceRange": "µg/L",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": null
+      "guidelineValue": null,
+      "guidelineAuthority": null,
+      "referenceRange": "\u00b5g/L",
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": null
     },
     {
       "id": "lead",
       "name": "Lead",
       "abbreviation": "Pb",
-      "aliases": ["lead"],
-      "commonSources": ["old pipes/paint", "contaminated soil"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": "Blood lead test",
+      "aliases": [
+        "lead"
+      ],
+      "commonSources": [
+        "old pipes/paint",
+        "contaminated soil"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": "Blood lead test",
       "severity": "High",
       "evidenceTier": "Strong",
-      "mechanism": null, "pediatricHarms": "Neurodevelopmental delay",
+      "mechanism": "Interferes with calcium-dependent signalling and disrupts the hypothalamic-pituitary axis. It can impair sex hormone production and thyroid function.",
+      "pediatricHarms": "Neurodevelopmental delay",
       "adultHarms": null,
-      "guidelineValue": ">5 µg/dL unsafe",
-      "guidelineAuthority": "Blood lead reference",
+      "guidelineValue": "\u22653.5 \u00b5g/dL (CDC BLRV, 2021)",
+      "guidelineAuthority": "CDC Blood Lead Reference Value (2021)",
       "referenceRange": null,
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": null
+      "referenceSourceUrl": "https://www.cdc.gov/mmwr/volumes/70/wr/mm7043a4.htm",
+      "draftAppOutputMessage": null,
+      "notes": "No blood lead level is considered safe."
     },
     {
       "id": "cadmium",
       "name": "Cadmium",
       "abbreviation": "Cd",
-      "aliases": ["cadmium"],
-      "commonSources": ["batteries", "contaminated food"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": "Blood/urine test",
+      "aliases": [
+        "cadmium"
+      ],
+      "commonSources": [
+        "batteries",
+        "contaminated food"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": "Blood/urine test",
       "severity": "High",
       "evidenceTier": "Strong",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "Acts as a metalloestrogen by activating estrogen receptors and inducing oxidative stress. It also disrupts steroid hormone synthesis.",
+      "pediatricHarms": null,
       "adultHarms": "Kidney, endocrine toxicity",
-      "guidelineValue": null, "guidelineAuthority": null,
-      "referenceRange": "Blood/urine µg/L",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": null
+      "guidelineValue": null,
+      "guidelineAuthority": null,
+      "referenceRange": "Blood/urine \u00b5g/L",
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": null
     },
     {
       "id": "arsenic",
       "name": "Arsenic",
       "abbreviation": "As",
-      "aliases": ["arsenic"],
-      "commonSources": ["contaminated groundwater"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "arsenic"
+      ],
+      "commonSources": [
+        "contaminated groundwater"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "High",
       "evidenceTier": "Strong",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "Alters glucocorticoid and other nuclear receptor signalling while inducing oxidative stress. These effects interfere with endocrine regulation.",
+      "pediatricHarms": null,
       "adultHarms": "Cancer, endocrine effects",
-      "guidelineValue": "10 µg/L",
-      "guidelineAuthority": "WHO limit",
+      "guidelineValue": "10 \u00b5g/L",
+      "guidelineAuthority": "WHO provisional guideline (1993, current)",
       "referenceRange": null,
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": null
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": null
     },
     {
       "id": "mercury",
       "name": "Mercury",
       "abbreviation": "Hg",
-      "aliases": ["mercury"],
-      "commonSources": ["contaminated seafood", "industrial emissions"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": "Blood test",
+      "aliases": [
+        "mercury"
+      ],
+      "commonSources": [
+        "contaminated seafood",
+        "industrial emissions"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": "Blood test",
       "severity": "High",
       "evidenceTier": "Strong",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "Binds sulfhydryl groups in proteins, disrupting endocrine enzyme function and thyroid hormone regulation. Oxidative stress contributes to hormonal dysfunction.",
+      "pediatricHarms": null,
       "adultHarms": "Neurotoxicity",
-      "guidelineValue": null, "guidelineAuthority": null,
-      "referenceRange": "Blood µg/L",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": null
+      "guidelineValue": null,
+      "guidelineAuthority": null,
+      "referenceRange": "Blood \u00b5g/L",
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": null
     },
     {
       "id": "bps",
       "name": "Bisphenol S",
       "abbreviation": "BPS",
-      "aliases": ["bps", "bisphenol s"],
-      "commonSources": ["'BPA-free' plastics"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "bps",
+        "bisphenol s"
+      ],
+      "commonSources": [
+        "'BPA-free' plastics"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "Moderate",
       "evidenceTier": "Moderate",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "Acts as a weak estrogen receptor agonist and can interfere with androgen and thyroid hormone signalling. Its activity resembles BPA, although potency differs.",
+      "pediatricHarms": null,
       "adultHarms": "BPA-like effects",
-      "guidelineValue": null, "guidelineAuthority": null,
+      "guidelineValue": null,
+      "guidelineAuthority": null,
       "referenceRange": "Emerging data",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": "BPA substitute, considered a bisphenol analogue."
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": "BPA substitute, considered a bisphenol analogue."
     },
     {
       "id": "bpf",
       "name": "Bisphenol F",
       "abbreviation": "BPF",
-      "aliases": ["bpf", "bisphenol f"],
-      "commonSources": ["'BPA-free' plastics", "can linings"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "bpf",
+        "bisphenol f"
+      ],
+      "commonSources": [
+        "'BPA-free' plastics",
+        "can linings"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "Moderate",
       "evidenceTier": "Limited",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "Interacts with estrogen receptors and perturbs androgen and thyroid hormone signalling. It is a functional bisphenol analogue of BPA.",
+      "pediatricHarms": null,
       "adultHarms": "Hormonal disruption",
-      "guidelineValue": null, "guidelineAuthority": null,
+      "guidelineValue": null,
+      "guidelineAuthority": null,
       "referenceRange": "Limited data",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": "Bisphenol analogue."
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": "Bisphenol analogue."
     },
     {
       "id": "phytoestrogens",
       "name": "Phytoestrogens",
       "abbreviation": null,
-      "aliases": ["phytoestrogen", "phytoestrogens", "isoflavones"],
-      "commonSources": ["soy products", "plant-based foods"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "phytoestrogen",
+        "phytoestrogens",
+        "isoflavones"
+      ],
+      "commonSources": [
+        "soy products",
+        "plant-based foods"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "Low",
       "evidenceTier": "Limited",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "Plant-derived compounds that bind preferentially to estrogen receptors, especially ER\u03b2. They can weakly mimic or modulate endogenous estrogen signalling depending on exposure.",
+      "pediatricHarms": null,
       "adultHarms": "Mild estrogenic effects",
-      "guidelineValue": null, "guidelineAuthority": null,
+      "guidelineValue": null,
+      "guidelineAuthority": null,
       "referenceRange": "Dietary levels",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null,
-      "notes": "Naturally occurring in food, not a synthetic contaminant — flag differently in UI than industrial EDCs."
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": "Naturally occurring in food, not a synthetic contaminant \u2014 flag differently in UI than industrial EDCs."
     },
     {
       "id": "des",
       "name": "Diethylstilbestrol",
       "abbreviation": "DES",
-      "aliases": ["des", "diethylstilbestrol"],
-      "commonSources": ["historical pharmaceutical use (discontinued)"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "des",
+        "diethylstilbestrol"
+      ],
+      "commonSources": [
+        "historical pharmaceutical use (discontinued)"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "High",
       "evidenceTier": "Strong",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "A potent synthetic estrogen that strongly activates estrogen receptors. Fetal exposure permanently alters reproductive tract development and endocrine programming.",
+      "pediatricHarms": null,
       "adultHarms": "Cancer, reproductive defects",
-      "guidelineValue": "No safe level",
+      "guidelineValue": null,
       "guidelineAuthority": null,
       "referenceRange": null,
-      "referenceSourceUrl": null, "draftAppOutputMessage": null,
-      "notes": "Historical synthetic estrogen, not a current consumer-product ingredient — unlikely to be scanned via barcode/OCR in practice."
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": "Historical synthetic estrogen, not a current consumer-product ingredient \u2014 unlikely to be scanned via barcode/OCR in practice.",
+      "needsVerification": true
     },
     {
       "id": "flame_retardants_general",
       "name": "Flame retardants (general)",
       "abbreviation": null,
-      "aliases": ["flame retardant", "flame retardants"],
-      "commonSources": ["furniture foam", "electronics", "textiles"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "flame retardant",
+        "flame retardants"
+      ],
+      "commonSources": [
+        "furniture foam",
+        "electronics",
+        "textiles"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "High",
       "evidenceTier": "Strong",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "Many flame retardants interfere with thyroid hormone synthesis, transport, or receptor signalling. Some also activate nuclear receptors involved in endocrine regulation.",
+      "pediatricHarms": null,
       "adultHarms": "Thyroid disruption",
-      "guidelineValue": null, "guidelineAuthority": null,
+      "guidelineValue": null,
+      "guidelineAuthority": null,
       "referenceRange": "Persistent",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null,
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
       "notes": "TBBPA and PBDEs are specific flame retardants tracked separately with fuller profiles."
     },
     {
       "id": "organophosphates",
       "name": "Organophosphates",
       "abbreviation": null,
-      "aliases": ["organophosphate", "organophosphates"],
-      "commonSources": ["pesticides"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "organophosphate",
+        "organophosphates"
+      ],
+      "commonSources": [
+        "pesticides"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "Moderate",
       "evidenceTier": "Moderate",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "Primarily inhibit acetylcholinesterase but also affect hypothalamic-pituitary signalling and steroid hormone production. Chronic exposure may alter neuroendocrine regulation.",
+      "pediatricHarms": null,
       "adultHarms": "Neuroendocrine toxicity",
-      "guidelineValue": null, "guidelineAuthority": null,
+      "guidelineValue": null,
+      "guidelineAuthority": null,
       "referenceRange": "Exposure dependent",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": null
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": null
     },
     {
       "id": "chlorpyrifos",
       "name": "Chlorpyrifos",
       "abbreviation": null,
-      "aliases": ["chlorpyrifos"],
-      "commonSources": ["agricultural pesticide"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "chlorpyrifos"
+      ],
+      "commonSources": [
+        "agricultural pesticide"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "High",
       "evidenceTier": "Strong",
-      "mechanism": null, "pediatricHarms": "Neurodevelopmental toxicity",
+      "mechanism": "Inhibits acetylcholinesterase and also disrupts thyroid and reproductive hormone signalling. Neurodevelopmental toxicity is linked to altered neuroendocrine pathways.",
+      "pediatricHarms": "Neurodevelopmental toxicity",
       "adultHarms": null,
-      "guidelineValue": null, "guidelineAuthority": null,
-      "referenceRange": "µg/L",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": null
+      "guidelineValue": null,
+      "guidelineAuthority": null,
+      "referenceRange": "\u00b5g/L",
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": null
     },
     {
       "id": "carbamates",
       "name": "Carbamates",
       "abbreviation": null,
-      "aliases": ["carbamate", "carbamates"],
-      "commonSources": ["pesticides"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "carbamate",
+        "carbamates"
+      ],
+      "commonSources": [
+        "pesticides"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "Moderate",
       "evidenceTier": "Moderate",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "Reversibly inhibit acetylcholinesterase and may interfere with steroid hormone synthesis. Neuroendocrine signalling can be altered after sustained exposure.",
+      "pediatricHarms": null,
       "adultHarms": "Endocrine interference",
-      "guidelineValue": null, "guidelineAuthority": null,
+      "guidelineValue": null,
+      "guidelineAuthority": null,
       "referenceRange": "Variable",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": null
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": null
     },
     {
       "id": "benzophenones",
       "name": "Benzophenones",
       "abbreviation": null,
-      "aliases": ["benzophenone", "benzophenones", "oxybenzone"],
-      "commonSources": ["sunscreens", "cosmetics"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "benzophenone",
+        "benzophenones",
+        "oxybenzone"
+      ],
+      "commonSources": [
+        "sunscreens",
+        "cosmetics"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "Moderate",
       "evidenceTier": "Moderate",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "Several benzophenones act as weak estrogen receptor agonists and may antagonize androgen receptors. They can also interfere with thyroid hormone signalling.",
+      "pediatricHarms": null,
       "adultHarms": "Estrogenic activity",
-      "guidelineValue": null, "guidelineAuthority": null,
+      "guidelineValue": null,
+      "guidelineAuthority": null,
       "referenceRange": "Cosmetic exposure",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": "UV filters are a closely related but separately-tracked category."
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": "UV filters are a closely related but separately-tracked category."
     },
     {
       "id": "uv_filters",
       "name": "UV filters (general)",
       "abbreviation": null,
-      "aliases": ["uv filter", "uv filters", "sunscreen filter"],
-      "commonSources": ["sunscreens", "cosmetics"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "uv filter",
+        "uv filters",
+        "sunscreen filter"
+      ],
+      "commonSources": [
+        "sunscreens",
+        "cosmetics"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "Low-Moderate",
       "evidenceTier": "Limited",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "Some UV filters interact with estrogen, androgen, and thyroid hormone receptors. Endocrine activity varies considerably between individual compounds.",
+      "pediatricHarms": null,
       "adultHarms": "Hormonal disruption",
-      "guidelineValue": null, "guidelineAuthority": null,
+      "guidelineValue": null,
+      "guidelineAuthority": null,
       "referenceRange": "Low environmental levels",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": null
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": null
     },
     {
       "id": "microplastics",
       "name": "Microplastics",
       "abbreviation": null,
-      "aliases": ["microplastic", "microplastics"],
-      "commonSources": ["degraded plastics", "personal care exfoliants", "packaging"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "microplastic",
+        "microplastics"
+      ],
+      "commonSources": [
+        "degraded plastics",
+        "personal care exfoliants",
+        "packaging"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "Emerging",
       "evidenceTier": "Limited",
       "mechanism": "Hormone disruption via carrier effect (adsorbed chemicals)",
-      "pediatricHarms": null, "adultHarms": null,
-      "guidelineValue": "No standard range",
-      "guidelineAuthority": null, "referenceRange": null,
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": null
+      "pediatricHarms": null,
+      "adultHarms": null,
+      "guidelineValue": null,
+      "guidelineAuthority": null,
+      "referenceRange": null,
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": null,
+      "needsVerification": true
     },
     {
       "id": "nanoplastics",
       "name": "Nanoplastics",
       "abbreviation": null,
-      "aliases": ["nanoplastic", "nanoplastics"],
-      "commonSources": ["degraded microplastics"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "nanoplastic",
+        "nanoplastics"
+      ],
+      "commonSources": [
+        "degraded microplastics"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "Emerging",
       "evidenceTier": "Limited",
       "mechanism": "Cellular toxicity",
-      "pediatricHarms": null, "adultHarms": null,
-      "guidelineValue": "No standard range",
-      "guidelineAuthority": null, "referenceRange": null,
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": null
+      "pediatricHarms": null,
+      "adultHarms": null,
+      "guidelineValue": null,
+      "guidelineAuthority": null,
+      "referenceRange": null,
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": null,
+      "needsVerification": true
     },
     {
       "id": "perfluorinated_compounds",
       "name": "Perfluorinated compounds (general)",
       "abbreviation": null,
-      "aliases": ["perfluorinated compound", "perfluorinated compounds"],
-      "commonSources": ["non-stick coatings", "water-resistant products"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "perfluorinated compound",
+        "perfluorinated compounds"
+      ],
+      "commonSources": [
+        "non-stick coatings",
+        "water-resistant products"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "High",
       "evidenceTier": "Strong",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "Activate PPAR pathways and interfere with thyroid hormone homeostasis. Persistent exposure is associated with metabolic and endocrine disturbances.",
+      "pediatricHarms": null,
       "adultHarms": "Metabolic disorders",
-      "guidelineValue": null, "guidelineAuthority": null,
+      "guidelineValue": null,
+      "guidelineAuthority": null,
       "referenceRange": "ng/L",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null,
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
       "notes": "Umbrella category overlapping with PFAS/PFOS, which are tracked separately."
     },
     {
       "id": "tributyltin",
       "name": "Tributyltin",
       "abbreviation": "TBT",
-      "aliases": ["tributyltin", "tbt"],
-      "commonSources": ["marine antifouling paints", "PVC stabilizers"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "tributyltin",
+        "tbt"
+      ],
+      "commonSources": [
+        "marine antifouling paints",
+        "PVC stabilizers"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "High",
       "evidenceTier": "Strong",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "Potently activates PPAR\u03b3 and retinoid X receptor (RXR), promoting adipocyte differentiation. This obesogen mechanism also disrupts endocrine regulation.",
+      "pediatricHarms": null,
       "adultHarms": "Obesity, endocrine disruption",
-      "guidelineValue": null, "guidelineAuthority": null,
+      "guidelineValue": null,
+      "guidelineAuthority": null,
       "referenceRange": "ng/L",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null, "notes": null
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
+      "notes": null
     },
     {
       "id": "bisphenol_analogues",
       "name": "Bisphenol analogues (general)",
       "abbreviation": null,
-      "aliases": ["bisphenol analogue", "bisphenol analogues"],
-      "commonSources": ["'BPA-free' plastics"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "bisphenol analogue",
+        "bisphenol analogues"
+      ],
+      "commonSources": [
+        "'BPA-free' plastics"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "Moderate",
       "evidenceTier": "Limited",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "Most bisphenol analogues act as weak estrogen receptor agonists and can interfere with androgen and thyroid hormone signalling. Their mechanisms broadly resemble BPA.",
+      "pediatricHarms": null,
       "adultHarms": "Estrogen mimic",
-      "guidelineValue": null, "guidelineAuthority": null,
+      "guidelineValue": null,
+      "guidelineAuthority": null,
       "referenceRange": "Emerging concern",
-      "referenceSourceUrl": null, "draftAppOutputMessage": null,
+      "referenceSourceUrl": null,
+      "draftAppOutputMessage": null,
       "notes": "Umbrella category; BPS and BPF are specific analogues tracked separately."
     },
     {
       "id": "synthetic_hormones_ee2",
       "name": "Synthetic hormones (Ethinylestradiol)",
       "abbreviation": "EE2",
-      "aliases": ["ee2", "ethinylestradiol", "synthetic hormone"],
-      "commonSources": ["pharmaceutical wastewater contamination"],
-      "scanMethod": null, "appDetectionMethod": null, "labConfirmationMethod": null,
+      "aliases": [
+        "ee2",
+        "ethinylestradiol",
+        "synthetic hormone"
+      ],
+      "commonSources": [
+        "pharmaceutical wastewater contamination"
+      ],
+      "scanMethod": null,
+      "appDetectionMethod": null,
+      "labConfirmationMethod": null,
       "severity": "High",
       "evidenceTier": "Strong",
-      "mechanism": null, "pediatricHarms": null,
+      "mechanism": "A potent estrogen receptor agonist that mimics endogenous estradiol. Even low environmental concentrations can disrupt reproductive endocrine signalling.",
+      "pediatricHarms": null,
       "adultHarms": "Reproductive disruption",
-      "guidelineValue": null, "guidelineAuthority": null,
+      "guidelineValue": null,
+      "guidelineAuthority": null,
       "referenceRange": "~0.3 ng/L",
       "referenceSourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10424550/",
       "draftAppOutputMessage": null,
-      "notes": "Environmental/water-exposure context, not a labeled product ingredient — unlikely to be scanned via barcode/OCR."
+      "notes": "Environmental/water-exposure context, not a labeled product ingredient \u2014 unlikely to be scanned via barcode/OCR."
     }
   ]
 }

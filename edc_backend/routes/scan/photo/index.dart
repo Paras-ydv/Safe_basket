@@ -48,9 +48,9 @@ Future<Response> onRequest(RequestContext context) async {
     return errorResponse('invalid_content_type', 'Missing multipart boundary.');
   }
 
-  final bodyBytes = await context.request.bytes();
+  final bodyStream = context.request.bytes();
   final parts = MimeMultipartTransformer(boundary)
-      .bind(Stream.value(bodyBytes as List<int>))
+      .bind(bodyStream)
       .asBroadcastStream();
 
   List<int>? imageBytes;

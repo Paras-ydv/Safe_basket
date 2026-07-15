@@ -40,8 +40,8 @@ Handler middleware(Handler handler) {
     }
     final repo = EdcRepository(conn);
 
-    // Wire the real loader into the cache on first use
-    final cache = EdcCache(() => repo.findAll());
+    // Reuse the shared cache instance primed at startup.
+    final cache = context.read<EdcCache>();
 
     try {
       return await handler
