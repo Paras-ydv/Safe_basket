@@ -50,7 +50,7 @@ Future<Response> onRequest(RequestContext context) async {
 
   final bodyBytes = await context.request.bytes();
   final parts = MimeMultipartTransformer(boundary)
-      .bind(Stream.value(bodyBytes))
+      .bind(Stream.value(bodyBytes as List<int>))
       .asBroadcastStream();
 
   List<int>? imageBytes;
