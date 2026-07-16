@@ -302,6 +302,99 @@ not a database enum — because the categories are hedged and compound.
 
 ---
 
+## To Do — EDC Client Integration
+
+The **EDC Flutter client** is contract-ready and already calls every endpoint below (it binds
+real Dio repos by default). This backlog is what the backend must deliver/confirm so the two
+halves connect end-to-end. A shared pure-Dart package **`edc_contracts`** (`../edc_contracts`,
+already path-depended by `edc_backend`) holds the exact wire DTOs + the single
+`normalizeSeverity()` mapper — **serialize responses via its `toJson()` methods** so the two
+sides never drift. `EdcEntry → contracts` mappers live in `lib/contracts_mapper.dart`.
+
+### Conventions (client already assumes these)
+- [x] Envelope `{ data, disclaimer, error }` (already implemented).
+- [ ] **JSON in snake_case** on all new payloads (`scan_id`, `overall_risk`, `received_at`, …).
+- [ ] **Normalized risk server-side** — every scan payload carries a `risk` / `overall_risk`
+  using the 4-value wire enum **`low` · `moderate` · `high` · `very_high`** (not the raw
+  `severity`). Mapping (in `edc_contracts.normalizeSeverity`, tunable): `Non-EDC, Emerging,
+  Low → low` · `Low-Moderate, Dose-dependent, Moderate → moderate` · `Moderate-High, High →
+  high` · `Acute → very_high` · unknown → `moderate`. Keep raw `severity` + `evidence_tier`
+  as extra fields for display.
+- [ ] **Auth** via the existing `X-User-Id` header (device id today → account id when Google
+  Sign-In lands; JWT can be added then).
+
+### Endpoints
+Payloads shown are the `data` field inside the envelope.
+
+**Done — confirm shapes:**
+- [x] `POST /scan/barcode` — body `{ "barcode": "..." }` → `data: ScanResult` (now resolves
+  product **and** runs the matcher over its ingredients; returns risk, not just product info).
+- [x] `POST /scan/manual` — body `{ "query": "..." }` → `data: ScanResult`.
+
+**To build:**
+- [ ] `POST /scan/image` — async wrapper over the synchronous `/scan/photo`;
+  `multipart/form-data` field `image` → `data: { "job_id": "..." }`. Enqueue a job, run
+  OCR+match in the background, persist the result.
+- [ ] `GET /scan/image/{jobId}` → `data: { "status": "pending"|"done"|"failed",
+  "result": ScanResult (done), "error": string (failed) }`.
+- [ ] `GET /scan/{scanId}` → `data: ScanResult` (fetch a stored scan).
+- [ ] `GET /history` (`X-User-Id`) → `data: [ ScanResult ]` (this user's scans, newest first).
+- [ ] `POST /scan/water` — body `{ "source_type": "...", "location": "..." }` →
+  `data: ScanResult` (environmental; derive from `EdcEntry` `reference_range` /
+  `guideline_value` / `guideline_authority`).
+- [ ] `GET /chemicals/{id}` → `data: ChemicalDetail` (public read of an `EdcEntry`).
+- [ ] `GET /chemicals/{id}/alternatives` → `data: [ Alternative ]`.
+- [ ] `GET /notifications` (`X-User-Id`) → `data: [ AppNotification ]`.
+
+### DTO shapes (snake_case JSON — see `edc_contracts`)
+```jsonc
+// ScanResult
+{ "scan_id","product_name","scanned_at" (ISO-8601 UTC),
+  "overall_risk": "low|moderate|high|very_high",
+  "product_meta": string|null,
+  "detected_chemicals": [ DetectedChemical ], "disclaimer": string|null }
+// DetectedChemical  (message = draft_app_output_message)
+{ "id","name","risk","severity"?,"evidence_tier"?,"message"? }
+// ChemicalDetail
+{ "id","name","risk","chemical_class","regulatory_status",
+  "health_effects": [string], "exposure_routes": ["dermal"|"ingestion"|"inhalation"] }
+// Alternative
+{ "id","name","risk","note"? }
+// AppNotification
+{ "id","title","body","received_at","risk": <risk>|null, "read": bool }
+```
+
+### Suggested build order
+1. Confirm the two done routes (barcode-risk, `/scan/manual`).
+2. Async job wrapper + persistence: `scan_jobs` + `scans` tables → unlocks `/scan/image`, the
+   poll route, `/scan/{id}`, and `/history` together.
+3. `/chemicals/{id}` (map `EdcEntry → ChemicalDetail`).
+4. `/scan/water` (reuse `EdcEntry` water data).
+5. `/chemicals/{id}/alternatives` and `/notifications` (need data — see below).
+
+### Blockers to clear first
+- [ ] `dart analyze` reports **pre-existing errors** (package-version drift, not from the
+  client changes): `routes/scan/photo.dart:53` (`Stream<List<int>>` vs `List<int>`) and
+  `routes/admin/middleware.dart:23` (`Undefined class 'Connection'`). These block
+  `dart_frog dev` — pin/upgrade `postgres`/`dart_frog` and fix the multipart read.
+- [ ] Add `publish_to: none` to `edc_backend/pubspec.yaml` (it has path deps → analysis warnings).
+
+### Data / modelling gaps (need product input)
+- [ ] **Alternatives** — `EdcEntry` has no "safer alternative" data. Add a curated field or
+  derive (e.g. lower-severity entries sharing `common_sources`). Confirm approach.
+- [ ] **Notifications** — no table/data yet. Needs a `notifications` table + how alerts are
+  generated (high-risk scan? recalls?).
+- [ ] **Chemical `exposure_routes`** — `EdcEntry` doesn't model dermal/ingestion/inhalation.
+  Send `[]` for now, or add the field.
+
+### Confirm back to the client team
+- [ ] OCR job polling params (expected duration, TTL / max attempts); webhook/push later?
+- [ ] Water-check semantics (what `source_type`/`location` key off in the dataset).
+- [ ] Keep normalized 4-level risk, or also expose the full 9-value severity to the UI?
+- [ ] Auth timeline: `X-User-Id` (device id) → real JWT / Google identity.
+
+---
+
 ## Production Hardening Notes
 
 - Rate limiter is in-process (per-isolate). Move to Redis ZSET for multi-instance correctness — see `lib/middleware/rate_limiter.dart` TODO.

@@ -13,6 +13,8 @@ dependencies:
   postgres: ^3.3.0
   edc_matcher:
     path: ../edc_matcher
+  edc_contracts:
+    path: ../edc_contracts
 
 dev_dependencies:
   dart_frog_gen: ^2.1.0

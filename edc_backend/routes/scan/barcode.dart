@@ -1,8 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dart_frog/dart_frog.dart';
+import 'package:edc_backend/contracts_mapper.dart';
+import 'package:edc_backend/ocr/match_service.dart';
 import 'package:edc_backend/product_resolution/product_resolution_service.dart';
 import 'package:edc_backend/response_envelope.dart';
+import 'package:edc_matcher/edc_matcher.dart';
 
 Future<Response> onRequest(RequestContext context) async {
   if (context.request.method != HttpMethod.post) {
@@ -25,7 +28,21 @@ Future<Response> onRequest(RequestContext context) async {
   final service = context.read<ProductResolutionService>();
 
   try {
-    final result = await service.resolveBarcode(barcode.trim());
+    final product = await service.resolveBarcode(barcode.trim());
+
+    // Run the matcher over the resolved ingredients so a barcode scan returns
+    // risk, not just product info.
+    final entries = context.read<List<EdcEntry>>();
+    final match = matchAndClassify(product.ingredientsText, entries);
+
+    final result = scanResultFromMatch(
+      scanId: 'barcode-${barcode.trim()}',
+      productName: product.name,
+      productMeta: product.brand.isEmpty ? null : product.brand,
+      matched: match.matches,
+      worstSeverity: match.worstSeverity,
+    );
+
     return okResponse(result.toJson());
   } on ProductNotFoundException {
     return errorResponse('not_found', 'No product found for barcode $barcode.',
