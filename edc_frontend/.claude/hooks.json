@@ -1,0 +1,13 @@
+{
+  "PreToolUse": [
+    {
+      "matcher": "Write|Edit",
+      "command": "bash -c 'if [[ \"$CLAUDE_TOOL_INPUT_PATH\" == *.g.dart ]] || [[ \"$CLAUDE_TOOL_INPUT_PATH\" == *.freezed.dart ]]; then echo \"Blocked: Do not edit generated files. Run build_runner instead.\"; exit 1; fi'"
+    }
+  ],
+  "Stop": [
+    {
+      "command": "bash -c 'result=$(flutter analyze 2>&1); if echo \"$result\" | grep -q \"error •\"; then echo \"Flutter analyze found errors. Fix before stopping:\"; echo \"$result\"; exit 1; fi'"
+    }
+  ]
+}
