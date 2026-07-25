@@ -8,11 +8,16 @@ import 'package:edc_backend/middleware/rate_limiter.dart';
 import 'package:edc_backend/response_envelope.dart';
 
 // 10 OCR calls per user per minute.
-// Adjust maxRequests/window before production based on Vision API budget.
 final _limiter = RateLimiter(
   maxRequests: 10,
   window: const Duration(minutes: 1),
 );
+
+/// In-memory job store: jobId → completed job payload.
+/// Keyed by jobId; entries are maps with keys: status, result, error.
+/// In production this would be a database table or Redis, but an in-memory
+/// map is sufficient for a single-instance dev server.
+final Map<String, Map<String, dynamic>> jobStore = {};
 
 Future<Response> onRequest(RequestContext context) async {
   if (context.request.method != HttpMethod.post) {
@@ -32,9 +37,8 @@ Future<Response> onRequest(RequestContext context) async {
     );
   }
 
-  // ── Request ID for log correlation ────────────────────────────────────────
-  final requestId = context.request.headers['x-request-id'] ??
-      DateTime.now().microsecondsSinceEpoch.toString();
+  // ── Generate a job ID ─────────────────────────────────────────────────────
+  final jobId = 'job-${DateTime.now().microsecondsSinceEpoch}';
 
   // ── Parse multipart/form-data ─────────────────────────────────────────────
   final contentType = context.request.headers['content-type'] ?? '';
@@ -50,7 +54,7 @@ Future<Response> onRequest(RequestContext context) async {
 
   final bodyBytes = await context.request.bytes();
   final parts = MimeMultipartTransformer(boundary)
-      .bind(Stream.value(bodyBytes))
+      .bind(Stream<List<int>>.value(bodyBytes as List<int>))
       .asBroadcastStream();
 
   List<int>? imageBytes;
@@ -68,33 +72,36 @@ Future<Response> onRequest(RequestContext context) async {
         'missing_image', 'Multipart field "image" is required.');
   }
 
-  // ── OCR ───────────────────────────────────────────────────────────────────
+  // ── OCR + match (synchronous but returned as a completed job) ─────────────
   final ocr = context.read<OcrService>();
-  final String cleanedText;
+  final entries = context.read<List<EdcEntry>>();
+
   try {
-    cleanedText = await ocr.extractTextFromImage(imageBytes);
+    final cleanedText = await ocr.extractTextFromImage(imageBytes);
+    final result = matchAndClassify(cleanedText, entries, requestId: jobId);
+
+    jobStore[jobId] = {
+      'status': 'done',
+      'result': {
+        'request_id': jobId,
+        'raw_text': cleanedText,
+        'analysis': result.toJson(),
+      },
+    };
   } on OcrNoTextException {
-    return errorResponse(
-        'ocr_no_text', 'No text detected — image may be blurry or unclear.',
-        statusCode: HttpStatus.unprocessableEntity);
+    jobStore[jobId] = {
+      'status': 'failed',
+      'error': 'No text detected — image may be blurry or unclear.',
+    };
   } on OcrFailedException catch (e) {
-    return errorResponse('ocr_failed', e.message,
-        statusCode: HttpStatus.badGateway);
+    jobStore[jobId] = {
+      'status': 'failed',
+      'error': e.message,
+    };
   }
 
-  // ── Match + classify ──────────────────────────────────────────────────────
-  final entries = context.read<List<EdcEntry>>();
-  final result = matchAndClassify(
-    cleanedText,
-    entries,
-    requestId: requestId,
-  );
-
-  return okResponse({
-    'request_id': requestId,
-    'raw_text': cleanedText,
-    'analysis': result.toJson(),
-  });
+  // Return the jobId immediately; client polls GET /scan/image/:jobId
+  return okResponse({'jobId': jobId});
 }
 
 String? _boundary(String contentType) {

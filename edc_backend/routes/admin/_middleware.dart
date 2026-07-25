@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:dart_frog/dart_frog.dart';
+import 'package:postgres/postgres.dart';
 import 'package:edc_backend/config.dart';
 import 'package:edc_backend/edc_repository/edc_cache.dart';
 import 'package:edc_backend/edc_repository/edc_repository.dart';

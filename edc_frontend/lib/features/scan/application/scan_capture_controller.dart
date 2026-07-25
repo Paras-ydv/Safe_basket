@@ -61,6 +61,7 @@ class ScanCaptureController extends _$ScanCaptureController {
       final result = await ref
           .read(scanRepositoryProvider)
           .submitBarcode(value: value, symbology: symbology);
+      scanResultCache[result.scanId] = result;
       state = ScanSuccess(result.scanId);
     } catch (_) {
       state = const ScanFailure(
@@ -80,6 +81,7 @@ class ScanCaptureController extends _$ScanCaptureController {
       final result = await ref
           .read(scanRepositoryProvider)
           .submitWater(sourceType: sourceType, location: location);
+      scanResultCache[result.scanId] = result;
       state = ScanSuccess(result.scanId);
     } catch (_) {
       state = const ScanFailure(
@@ -94,6 +96,7 @@ class ScanCaptureController extends _$ScanCaptureController {
     state = const ScanSubmitting();
     try {
       final result = await ref.read(scanRepositoryProvider).submitManual(query);
+      scanResultCache[result.scanId] = result;
       state = ScanSuccess(result.scanId);
     } catch (_) {
       state = const ScanFailure(

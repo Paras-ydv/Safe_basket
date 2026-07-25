@@ -7,8 +7,9 @@ import 'package:edc_backend/response_envelope.dart';
 import 'package:edc_backend/scan_store.dart';
 import 'package:edc_matcher/edc_matcher.dart';
 
-/// Manual product / chemical entry (`POST /scan/manual`). Runs the matcher over
-/// free text — no OCR involved.
+/// Water source check (`POST /scan/water`).
+/// Accepts { sourceType, location } and runs the matcher over the combined
+/// text so the same risk pipeline applies to water contaminants.
 Future<Response> onRequest(RequestContext context) async {
   if (context.request.method != HttpMethod.post) {
     return errorResponse('method_not_allowed', 'Only POST is supported.',
@@ -22,17 +23,26 @@ Future<Response> onRequest(RequestContext context) async {
     return errorResponse('invalid_body', 'Request body must be valid JSON.');
   }
 
-  final query = body['query'];
-  if (query is! String || query.trim().isEmpty) {
-    return errorResponse('invalid_query', '"query" must be a non-empty string.');
+  final sourceType = body['sourceType'];
+  final location = body['location'];
+
+  if (sourceType is! String || sourceType.trim().isEmpty) {
+    return errorResponse(
+        'invalid_source_type', '"sourceType" must be a non-empty string.');
   }
 
+  final query = [
+    sourceType.trim(),
+    if (location is String && location.trim().isNotEmpty) location.trim(),
+  ].join(' ');
+
   final entries = context.read<List<EdcEntry>>();
-  final match = matchAndClassify(query.trim(), entries);
+  final match = matchAndClassify(query, entries);
 
   final result = scanResultFromMatch(
-    scanId: 'manual-${query.trim().hashCode}',
-    productName: query.trim(),
+    scanId: 'water-${query.hashCode}',
+    productName: sourceType.trim(),
+    productMeta: location is String ? location.trim() : null,
     matched: match.matches,
     worstSeverity: match.worstSeverity,
   );

@@ -5,6 +5,7 @@ import 'package:edc_backend/contracts_mapper.dart';
 import 'package:edc_backend/ocr/match_service.dart';
 import 'package:edc_backend/product_resolution/product_resolution_service.dart';
 import 'package:edc_backend/response_envelope.dart';
+import 'package:edc_backend/scan_store.dart';
 import 'package:edc_matcher/edc_matcher.dart';
 
 Future<Response> onRequest(RequestContext context) async {
@@ -42,6 +43,9 @@ Future<Response> onRequest(RequestContext context) async {
       matched: match.matches,
       worstSeverity: match.worstSeverity,
     );
+
+    // Cache so GET /scan/[scanId] can retrieve it after redirect.
+    scanResultStore[result.scanId] = result.toJson();
 
     return okResponse(result.toJson());
   } on ProductNotFoundException {
